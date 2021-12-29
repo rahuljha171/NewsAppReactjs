@@ -20,11 +20,18 @@ const News = (props) => {
   const updateNews = async () => {
     //this.setState({ loading: true });
     setLoading(true)
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
-    let data = await fetch(url);
+    // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    const newsCatcher = `https://api.newscatcherapi.com/v2/latest_headlines?countries=${props.country}&topic=${props.category}&page=1&page_size=${props.pageSize}&lang=en`
+    const url = newsCatcher;
+    const data = await fetch(url, {
+      "headers": {
+        "x-api-key": props.apiKey
+      }
+    });
+    // let data = await fetch(url);
     let parsedData = await data.json();
     setArticles(parsedData.articles)
-    setTotalResults(parsedData.totalResults)
+    setTotalResults(parsedData.total_pages)
     setLoading(false)
 
     // this.setState({
@@ -56,13 +63,21 @@ const News = (props) => {
   const fetchMoreData = async () => {
     //this.setState({ page : page + 1 })
 
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
+    // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
+    const newsCatcher = `https://api.newscatcherapi.com/v2/latest_headlines?countries=${props.country}&topic=${props.category}&page=${page + 1}&page_size=${props.pageSize}&lang=en`
+
+    const url = newsCatcher;
+    const data = await fetch(url, {
+      "headers": {
+        "x-api-key": props.apiKey
+      }
+    });
     setPage(page + 1)
-    let data = await fetch(url);
+    // let data = await fetch(url);
     let parsedData = await data.json();
     //this.setState({ loading: true });
     setArticles(articles.concat(parsedData.articles))
-    setTotalResults(parsedData.totalResults)
+    setTotalResults(parsedData.total_pages)
     // this.setState({
     //   articles: articles.concat(parsedData.articles),
     //   totalrtotalResultsesult: parsedData.totalResults,
@@ -87,9 +102,9 @@ const News = (props) => {
               return (
                 <div className="col-md-4" key={element.url}>
                   <NewsItems title={element.title ? element.title.slice(0, 45) : ""}
-                    description={element.description ? element.description.slice(0, 85) : ""}
-                    newsUrl={element.url} imageUrl={element.urlToImage}
-                    author={element.author} date={element.publishedAt}
+                    description={element.excerpt ? element.excerpt.slice(0, 85) : ""}
+                    newsUrl={element.link} imageUrl={element.media}
+                    author={element.author} date={element.published_date}
                   />
                 </div>
               );

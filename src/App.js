@@ -16,14 +16,14 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes >
-          <Route path="/*" element={<News apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general" />} />
-          <Route path="bussiness/*" element={<News apiKey={apiKey} key="business" pageSize={pageSize} country="in" category="business" />} />
+          <Route path="/*" element={<News apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="news" />} />
+          <Route path="business/*" element={<News apiKey={apiKey} key="business" pageSize={pageSize} country="in" category="business" />} />
           <Route path="entertainment/*" element={<News apiKey={apiKey} key="entertainment" pageSize={pageSize} country="in" category="entertainment" />} />
-          <Route path="general/*" element={<News apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general" />} />
-          <Route path="health/*" element={<News apiKey={apiKey} key="health" pageSize={pageSize} country="in" category="health" />} />
+          <Route path="general/*" element={<News apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="news" />} />
+          {/* <Route path="health/*" element={<News apiKey={apiKey} key="health" pageSize={pageSize} country="in" category="health" />} /> */}
           <Route path="science/*" element={<News apiKey={apiKey} key="science" pageSize={pageSize} country="in" category="science" />} />
-          <Route path="sports/*" element={<News apiKey={apiKey} key="sports" pageSize={pageSize} country="in" category="sports" />} />
-          <Route path="tech/*" element={<News apiKey={apiKey} key="tech" pageSize={pageSize} country="in" category="technology" />} />
+          <Route path="sports/*" element={<News apiKey={apiKey} key="sports" pageSize={pageSize} country="in" category="sport" />} />
+          <Route path="tech/*" element={<News apiKey={apiKey} key="tech" pageSize={pageSize} country="in" category="tech" />} />
           {/* <Route exact path="/" ><News key="general" pageSize={pageSize} country="in" category="general" /></Route>
             <Route exact path="/bussiness"><News key="bussiness" pageSize={pageSize} country="in" category="bussiness" /></Route>
             <Route exact path="/entertainment"><News key="entertainment" pageSize={pageSize} country="in" category="entertainment" /></Route>
@@ -39,5 +39,7 @@ const App = () => {
   )
 
 }
+
+
 
 export default App
